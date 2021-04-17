@@ -1,12 +1,24 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Profile</title>
 </head>
+
 <body>
     <h1>Profile</h1>
+    <div>{{user.first_name}}</div>
+    <div>{{user.last_name}}</div>
+    <div>{{user.username}}</div>
+    <div>{{user.email}}</div>
+    <img src="{% static 'profile.png' %}" height="300" width="300">
+    <div>{{user.profile.country}}</div>
+    <div>{{user.profile.gender}}</div>
+    <div>{{user.profile.date_of_birth}}</div>
 </body>
+
 </html>

@@ -4,7 +4,6 @@ from django_countries.fields import CountryField
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 
-# Create your models here.
 
 class Profile(models.Model):
     GENDER_CHOICES = (

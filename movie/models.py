@@ -9,6 +9,7 @@ class Movie(models.Model):
     cast = models.CharField(max_length=200)
     director = models.CharField(max_length=100)
     image = models.ImageField(upload_to="images/thumbnail", blank=True)
+    video = models.CharField(max_length=200)
     year = models.DateTimeField(default=timezone.now)
     genre = models.CharField(max_length=100)
     age_restriction = models.IntegerField()

@@ -1,0 +1,256 @@
+{% extends 'index.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	{% block title_block %}
+	<title>Details</title>
+	{% endblock %}
+
+</head>
+<body class="body">
+	{% block body_block %}
+	<!-- details -->
+	<section class="section details">
+		<!-- details background -->
+		<div class="details__bg" data-bg="{% static 'website/img/home/home__bg.jpg' %}"></div>
+		<!-- end details background -->
+
+		<!-- details content -->
+		<div class="container">
+			<div class="row">
+				<!-- title -->
+				<div class="col-12">
+					<h1 class="details__title">{{movie.title}}</h1>
+				</div>
+				<!-- end title -->
+
+				<!-- content -->
+				<div class="col-12 col-xl-6">
+					<div class="card card--details">
+						<div class="row">
+							<!-- card cover -->
+							<div class="col-12 col-sm-4 col-md-4 col-lg-3 col-xl-5">
+								<div class="card__cover">
+									<img src="{{movie.image.url}}" alt="">
+								</div>
+							</div>
+							<!-- end card cover -->
+
+							<!-- card content -->
+							<div class="col-12 col-sm-8 col-md-8 col-lg-9 col-xl-7">
+								<div class="card__content">
+									<div class="card__wrap">
+										<span class="card__rate"><i class="icon ion-ios-star"></i>8.4</span>
+
+										<ul class="card__list">
+											<li>HD</li>
+											<li>{{movie.age_restriction}}+</li>
+										</ul>
+									</div>
+
+									<ul class="card__meta">
+										<li><span>Director:</span> <a href="#">{{movie.director}}</a>
+										<li><span>Cast:</span> <a href="#">{{movie.cast}}</a>
+										<li><span>Genre:</span> <a href="#">{{movie.genre}}</a>
+										<li><span>Release year:</span>{{movie.year}}</li>
+										<li><span>Running time:</span> {{movie.duration}} min</li>
+									</ul>
+
+									<div class="card__description card__description--details">
+										{{movie.description}}
+									</div>
+								</div>
+							</div>
+							<!-- end card content -->
+						</div>
+					</div>
+				</div>
+				<!-- end content -->
+				<!-- player -->
+				<div class="col-12 col-xl-6">
+					<video controls crossorigin playsinline poster="../../../cdn.plyr.io/static/demo/View_From_A_Blue_Moon_Trailer-HD.jpg" id="player">
+						<!-- Video files -->
+						<source src="https://cdn.plyr.io/static/demo/View_From_A_Blue_Moon_Trailer-576p.mp4" type="video/mp4" size="576">
+						<source src="https://cdn.plyr.io/static/demo/View_From_A_Blue_Moon_Trailer-720p.mp4" type="video/mp4" size="720">
+						<source src="https://cdn.plyr.io/static/demo/View_From_A_Blue_Moon_Trailer-1080p.mp4" type="video/mp4" size="1080">
+						<source src="https://cdn.plyr.io/static/demo/View_From_A_Blue_Moon_Trailer-1440p.mp4" type="video/mp4" size="1440">
+
+						<!-- Caption files -->
+						<track kind="captions" label="English" srclang="en" src="https://cdn.plyr.io/static/demo/View_From_A_Blue_Moon_Trailer-HD.en.vtt"
+						    default>
+						<track kind="captions" label="Français" srclang="fr" src="https://cdn.plyr.io/static/demo/View_From_A_Blue_Moon_Trailer-HD.fr.vtt">
+
+						<!-- Fallback for browsers that don't support the <video> element -->
+						<a href="https://cdn.plyr.io/static/demo/View_From_A_Blue_Moon_Trailer-576p.mp4" download>Download</a>
+					</video>
+				</div>
+				<!-- end player -->
+			</div>
+		</div>
+		<!-- end details content -->
+	</section>
+	<!-- end details -->
+
+	<!-- content -->
+	<section class="content">
+		<div class="content__head">
+			<div class="container">
+				<div class="row">
+					<div class="col-12">
+						<!-- content title -->
+						<h2 class="content__title">Discover</h2>
+						<!-- end content title -->
+
+						<!-- content tabs nav -->
+						<ul class="nav nav-tabs content__tabs" id="content__tabs" role="tablist">
+							<li class="nav-item">
+								<a class="nav-link active" data-toggle="tab" href="#tab-1" role="tab" aria-controls="tab-1" aria-selected="true">Comments</a>
+							</li>
+
+							<li class="nav-item">
+								<a class="nav-link" data-toggle="tab" href="#tab-2" role="tab" aria-controls="tab-2" aria-selected="false">Reviews</a>
+							</li>
+						</ul>
+						<!-- end content tabs nav -->
+
+						<!-- content mobile tabs nav -->
+						<div class="content__mobile-tabs" id="content__mobile-tabs">
+							<div class="content__mobile-tabs-btn dropdown-toggle" role="navigation" id="mobile-tabs" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+								<input type="button" value="Comments">
+								<span></span>
+							</div>
+
+							<div class="content__mobile-tabs-menu dropdown-menu" aria-labelledby="mobile-tabs">
+								<ul class="nav nav-tabs" role="tablist">
+									<li class="nav-item"><a class="nav-link active" id="1-tab" data-toggle="tab" href="#tab-1" role="tab" aria-controls="tab-1" aria-selected="true">Comments</a></li>
+
+									<li class="nav-item"><a class="nav-link" id="2-tab" data-toggle="tab" href="#tab-2" role="tab" aria-controls="tab-2" aria-selected="false">Reviews</a></li>
+								</ul>
+							</div>
+						</div>
+						<!-- end content mobile tabs nav -->
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="container">
+			<div class="row">
+				<div class="col-12 col-lg-8 col-xl-8">
+					<!-- content tabs -->
+					<div class="tab-content" id="myTabContent">
+						<div class="tab-pane fade show active" id="tab-1" role="tabpanel" aria-labelledby="1-tab">
+							<div class="row">
+								<!-- comments -->
+								{% if not movie.comments.all %}
+									No comments 
+								{% else %}
+									<!-- {% for comment in movie.comments.all %}
+										<strong>	
+										{{comment.name}} - 
+										{{comment.date_added}} </strong>
+										<br/>
+										{{comment.body}}
+									{% endfor %} -->
+								<div class="col-12">
+									<div class="comments">
+										<ul class="comments__list">
+											{% for comment in movie.comments.all %}
+											<li class="comments__item">
+												<div class="comments__autor">
+													<img class="comments__avatar" src="{% static 'website/img/profile.png' %}" alt="">
+													<span class="comments__name">{{comment.user}}</span>
+													<span class="comments__time">{{comment.date_added}}</span>
+												</div>
+												<p class="comments__text">{{comment.content}}</p>
+												<div class="comments__actions">
+													<div class="comments__rate">
+														<button type="button"><i class="icon ion-md-thumbs-up"></i>12</button>
+
+														<button type="button">7<i class="icon ion-md-thumbs-down"></i></button>
+													</div>
+
+													<button type="button"><i class="icon ion-ios-share-alt"></i>Reply</button>
+													<button type="button"><i class="icon ion-ios-quote"></i>Quote</button>
+												</div>
+											</li>
+											{% endfor %}
+											<li class="comments__item comments__item--answer">
+												<div class="comments__autor">
+													<img class="comments__avatar" src="img/user.png" alt="">
+													<span class="comments__name">John Doe</span>
+													<span class="comments__time">24.08.2018, 16:41</span>
+												</div>
+												<p class="comments__text">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
+												<div class="comments__actions">
+													<div class="comments__rate">
+														<button type="button"><i class="icon ion-md-thumbs-up"></i>8</button>
+
+														<button type="button">3<i class="icon ion-md-thumbs-down"></i></button>
+													</div>
+
+													<button type="button"><i class="icon ion-ios-share-alt"></i>Reply</button>
+													<button type="button"><i class="icon ion-ios-quote"></i>Quote</button>
+												</div>
+											</li>
+
+										<form method="POST" action="#" class="form">
+											{% csrf_token %}
+											{{comment_form.as_p}}
+											<button type="submit" class="btn btn-primary  btn-lg">Submit</button>
+											<textarea id="text" name="text" class="form__textarea" placeholder="Add comment"></textarea>
+											<button type="button" class="form__btn">Send</button>
+										</form>
+									</div>
+								</div>
+								{% endif %}
+								<!-- end comments -->
+							</div>
+						</div>
+
+						<div class="tab-pane fade" id="tab-2" role="tabpanel" aria-labelledby="2-tab">
+							<div class="row">
+								<!-- reviews -->
+								<div class="col-12">
+									<div class="reviews">
+										<ul class="reviews__list">
+											<li class="reviews__item">
+												<div class="reviews__autor">
+													<img class="reviews__avatar" src="img/user.png" alt="">
+													<span class="reviews__name">Best Marvel movie in my opinion</span>
+													<span class="reviews__time">24.08.2018, 17:53 by John Doe</span>
+
+													<span class="reviews__rating"><i class="icon ion-ios-star"></i>8.4</span>
+												</div>
+												<p class="reviews__text">There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of text.</p>
+											</li>
+										</ul>
+										<form action="#" class="form">
+											<input type="text" class="form__input" placeholder="Title">
+											<textarea class="form__textarea" placeholder="Review"></textarea>
+											<div class="form__slider">
+												<div class="form__slider-rating" id="slider__rating"></div>
+												<div class="form__slider-value" id="form__slider-value"></div>
+											</div>
+											<button type="button" class="form__btn">Send</button>
+										</form>
+									</div>
+								</div>
+								<!-- end reviews -->
+							</div>
+						</div>
+						<!-- end content tabs -->
+				</div>
+			</div>
+		</div>
+	</section>
+	<!-- end content -->
+	{% endblock %}
+</body>
+
+</html>

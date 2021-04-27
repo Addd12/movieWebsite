@@ -1,0 +1,36 @@
+{% extends 'index.html' %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% block title_block %}
+	<title>Register</title>
+	{% endblock %}
+</head>
+<body class="body">
+    {% block body_block %}
+    <div class="sign section--bg" data-bg="img/section/section.jpg">
+		<div class="container">
+			<div class="row">
+				<div class="col-12">
+					<div class="sign__content">
+                        <form method="POST" action="{% url 'register' %}" class="sign__form">
+                            <a href="{% url 'home' %}" class="sign__logo">
+								<img src="{% static 'website/img/logo.svg' %}" alt="">
+							</a>
+                            {% csrf_token %}
+                            {{form.as_p}}
+                            
+                            <button class="sign__btn" type="submit">Sign in</button>
+                        </form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+    {% endblock %}
+</body>
+</html>

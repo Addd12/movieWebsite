@@ -70,7 +70,15 @@
 								<button class="header__search-btn" type="button">
 									<i class="icon ion-ios-search"></i>
 								</button>
+								{% if user.is_authenticated %}
+								<li class="header__nav-item" style="padding-left: 200px;">
+									<a href="{% url 'profile' %}" class="header__nav-link">Profile</a>
+								</li>
 
+								<li class="header__nav-item">
+									<a href="{% url 'logout' %}" class="header__nav-link">Logout</a>
+								</li>
+								{% else %}
 								<a href="{% url 'register' %}" class="header__sign-in">
 									<i class="icon ion-ios-log-in"></i>
 									<span>Register</span>
@@ -80,6 +88,7 @@
 									<i class="icon ion-ios-log-in"></i>
 									<span>sign in</span>
 								</a>
+								{% endif %}
 							</div>
 							<!-- end header auth -->
 
@@ -151,7 +160,7 @@
 									</a>
 								</div>
 								<div class="card__content">
-									<h3 class="card__title"><a href="{% url 'details' %}">{{movie.title}}</a></h3>
+									<h3 class="card__title"><a href="{% url 'details' movie.id %}">{{movie.title}}</a></h3>
 									<span class="card__category">
 										<a href="#">{{movie.genre}}</a>
 									</span>
@@ -161,47 +170,6 @@
 							<!-- end card -->
 						</div>
 						{% endfor %}
-
-						<div class="item">
-							<!-- card -->
-							<div class="card card--big">
-								<div class="card__cover">
-									<img src="{% static 'website/img/covers/cover.jpg' %}" alt="">
-									<a href="#" class="card__play">
-										<i class="icon ion-ios-play"></i>
-									</a>
-								</div>
-								<div class="card__content">
-									<h3 class="card__title"><a href="#">I Dream in Another Language</a></h3>
-									<span class="card__category">
-										<a href="#">Action</a>
-										<a href="#">Triler</a>
-									</span>
-									<span class="card__rate"><i class="icon ion-ios-star"></i>8.4</span>
-								</div>
-							</div>
-							<!-- end card -->
-						</div>
-
-						<div class="item">
-							<!-- card -->
-							<div class="card card--big">
-								<div class="card__cover">
-									<img src="{% static 'website/img/covers/cover2.jpg' %}" alt="">
-									<a href="#" class="card__play">
-										<i class="icon ion-ios-play"></i>
-									</a>
-								</div>
-								<div class="card__content">
-									<h3 class="card__title"><a href="#">Benched</a></h3>
-									<span class="card__category">
-										<a href="#">Comedy</a>
-									</span>
-									<span class="card__rate"><i class="icon ion-ios-star"></i>7.1</span>
-								</div>
-							</div>
-							<!-- end card -->
-						</div>
 					</div>
 				</div>
 			</div>
@@ -285,7 +253,7 @@
 
 									<div class="col-12 col-sm-8">
 										<div class="card__content">
-											<h3 class="card__title"><a href="#">{{movie.title}}</a></h3>
+											<h3 class="card__title"><a href="{% url 'details' movie.id %}">{{movie.title}}</a></h3>
 											<span class="card__category">
 												<a href="#">{{movie.genre}}</a>
 											</span>

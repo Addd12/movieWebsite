@@ -9,13 +9,13 @@ from django.contrib.auth.decorators import login_required
 def register(request):
     if request.method == 'POST':
         form = RegistrationForm(request.POST)
-        profile_form = ProfileForm(request.POST)
+        #profile_form = ProfileForm(request.POST)
 
-        if form.is_valid() and profile_form.is_valid():
+        if form.is_valid(): #and profile_form.is_valid()
             user = form.save()
-            profile = profile_form.save(commit=False)
-            profile.user = user
-            profile.save()
+            # profile = profile_form.save(commit=False)
+            # profile.user = user
+            # profile.save()
 
             username = form.cleaned_data['username']
             password = form.cleaned_data['password1']
@@ -26,9 +26,12 @@ def register(request):
             return redirect('login')
     else:
         form = RegistrationForm()
-        profile_form = ProfileForm()
-    context = {'form': form, 'profile_form': profile_form}
+        #profile_form = ProfileForm()
+    #context = {'form': form, 'profile_form': profile_form}
+    #return render(request, 'register.html', context)
+    context = {'form': form}
     return render(request, 'register.html', context)
+
 
 def login_view(request):
     if request.method == 'POST':
@@ -50,4 +53,14 @@ def logout_view(request):
 
 @login_required
 def profile(request):
-    return render(request, 'profile.html')
+    if request.method == 'POST':
+        profile_form = ProfileForm(request.POST)
+        if profile_form.is_valid():
+            profile = profile_form.save(commit=False)
+            profile.save()
+        
+            return redirect('profile')
+    else:
+        profile_form = ProfileForm()
+    context = {'profile_form': profile_form}
+    return render(request, 'profile.html', context)

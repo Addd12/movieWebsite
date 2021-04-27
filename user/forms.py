@@ -28,3 +28,8 @@ class ProfileForm(forms.ModelForm):
     class Meta:
         model = Profile
         fields = ('profile_image', 'country', 'gender', 'date_of_birth')
+    
+    def form_valid(self, form):
+        form.instance.user = ProfileForm.objects.get(user=self.request.user)
+        form.instance.created_by = self.request.user
+        return super(ProfileForm, self).form_valid(form)

@@ -1,5 +1,6 @@
 from django.db import models
 from django.utils import timezone
+from django.contrib.auth.models import User
 
 # Create your models here.
 
@@ -18,3 +19,12 @@ class Movie(models.Model):
 
     def __str__(self):
         return self.title #writes the title of the movie on admin page instead of movie obj
+
+class Comment(models.Model):
+    movie = models.ForeignKey(Movie, related_name = "comments", on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete = models.CASCADE)
+    content = models.TextField()
+    date_added = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return '%s - %s' % (self.movie.title, self.name)

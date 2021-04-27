@@ -5,18 +5,18 @@ from .forms import CommentForm
 
 
 class MovieView(generic.ListView):
-    model = Movie
-    template_name = 'index.html'
+  model = Movie
+  template_name = 'index.html'
 
 def faq(request):
-    return render(request, 'faq.html')
+  return render(request, 'faq.html')
 
 def about(request):
-    return render(request, 'about.html')
+  return render(request, 'about.html')
 
 class MovieDetailsView(generic.DetailView):
-    model = Movie
-    template_name = "details.html"
+  model = Movie
+  template_name = "details.html"
 
 # class AddCommentView(generic.CreateView):
 #     model = Comment
@@ -39,3 +39,4 @@ def comment(request, id):
       'comment_form':cf,
       }
     return render(request, 'details.html', context)
+    

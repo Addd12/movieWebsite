@@ -64,3 +64,4 @@ def profile(request):
         profile_form = ProfileForm()
     context = {'profile_form': profile_form}
     return render(request, 'profile.html', context)
+    

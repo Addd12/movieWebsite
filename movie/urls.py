@@ -7,5 +7,4 @@ urlpatterns = [
     path("faq/", faq, name="faq"), 
     path("about/", about, name="about"), 
     path("details/<int:pk>", MovieDetailsView.as_view(), name="details"),
-    #path("details/<int:pk>/comment", AddCommentView.as_view(), name="comment"),
 ]

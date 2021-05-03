@@ -1,3 +1,4 @@
+{% extends 'index.html' %}
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
@@ -6,30 +7,41 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% block title_block %}
     <title>Profile</title>
+    {% endblock %}
 </head>
 
 <body>
-    <h1>Profile</h1>
-    <div>{{user.first_name}}</div>
-    <div>{{user.last_name}}</div>
-    <div>{{user.username}}</div>
-    <div>{{user.email}}</div>
-    <img src="{% static 'profile.png' %}" height="300" width="300">
-    <div>{{user.profile.country}}</div>
-    <div>{{user.profile.gender}}</div>
-    <div>{{user.profile.date_of_birth}}</div>
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
 
-    <form method="POST" action="{% url 'profile' %}" class="sign__form">
-        <a href="{% url 'home' %}" class="sign__logo">
-            <img src="{% static 'website/img/logo.svg' %}" alt="">
-        </a>
-        {% csrf_token %}
-        {{profile_form.as_p}}
-        
-        <button class="sign__btn" type="submit">Edit</button>
-    </form>
+                <div class="sign__form">
+                    {% block body_block %}
+                    <h1>Profile</h1>
+                    <img src="{% static 'profile.png' %}" height="300" width="300">
+                    <div>{{user.first_name}}</div>
+                    <div>{{user.last_name}}</div>
+                    <div>{{user.username}}</div>
+                    <div>{{user.email}}</div>
+                    <div>{{user.profile.country}}</div>
+                    <div>{{user.profile.gender}}</div>
+                    <div>{{user.profile.date_of_birth}}</div>
 
+                    <form method="POST" action="{% url 'profile' %}" class="sign__form">
+                        <a href="{% url 'home' %}" class="sign__logo">
+                            <img src="{% static 'website/img/logo.svg' %}" alt="">
+                        </a>
+                        {% csrf_token %}
+                        {{profile_form.as_p}}
+                        <button class="sign__btn" type="submit">Edit</button>
+                    </form>
+                    {% endblock %}
+                </div>
+            </div>
+        </div>
+    </div>
 </body>
 
 </html>

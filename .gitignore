@@ -3,3 +3,4 @@ __pycache__/
 .env
 user/templates/signup.html
 user/templates/signin.html
+movie/templates/movie.html

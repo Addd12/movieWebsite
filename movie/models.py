@@ -2,7 +2,6 @@ from django.db import models
 from django.utils import timezone
 from django.contrib.auth.models import User
 
-# Create your models here.
 
 class Movie(models.Model):
 
@@ -27,4 +26,4 @@ class Comment(models.Model):
     date_added = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return '%s - %s' % (self.movie.title, self.name)
+        return '%s - %s' % (self.movie.title, self.user)

@@ -1,13 +1,11 @@
 from django.shortcuts import render
 from django.views import generic
-from .models import Movie, Comment
+from .models import Movie
 from .forms import CommentForm
-<<<<<<< HEAD
-=======
 from django.views.generic.detail import DetailView
 from django.views.generic.edit import FormMixin
+from django.http import HttpResponseForbidden
 from django.urls import reverse
->>>>>>> user
 
 
 class MovieView(generic.ListView):
